@@ -1,160 +1,93 @@
-# 📱 Sorteio Proz - Simulação Educativa de Phishing
+# 📱 Sorteio Proz - Simulação de Engenharia Social
 
-Este projeto é uma Landing Page interativa que simula um sorteio de **iPhone 16 Pro** voltado para estudantes da Proz Educação. O objetivo real da aplicação é servir como uma ferramenta educativa de **Conscientização sobre Segurança da Informação** (Phishing e Engenharia Social).
+Esta aplicação web simula uma landing page de sorteio de um iPhone 16 Pro, desenhada especificamente para parecer uma campanha oficial da **Proz Educação**. O objetivo é servir como uma ferramenta prática para ensinar alunos sobre os perigos do **Phishing** e a importância de proteger dados pessoais como o CPF.
 
-Ao preencher o formulário (nome, CPF, telefone), o usuário é redirecionado para uma página de alerta explicando os riscos de fornecer dados sensíveis em sites desconhecidos.
+## 🛠️ Preparação para Publicação (Deploy)
 
-## 🚀 Como executar este projeto localmente
+Para colocar este site no ar gratuitamente usando o **GitHub Pages**, você precisará dos arquivos que foram incluídos neste projeto (`vite.config.ts` e `package.json`).
 
-Como este projeto utiliza **React** e **TypeScript**, ele precisa de um ambiente de construção (build) para funcionar corretamente fora do ambiente de testes. Recomendamos o uso do **Vite**.
+Siga os passos abaixo rigorosamente:
 
-### 1. Pré-requisitos
-Certifique-se de ter o [Node.js](https://nodejs.org/) instalado em seu computador.
+### Passo 1: Criar o Repositório no GitHub
+1. Vá até o [GitHub](https://github.com) e crie um novo repositório (ex: `sorteio-proz-2025`).
+2. Deixe-o como **Public**.
+3. Não adicione README ou .gitignore por enquanto.
 
-### 2. Criar a estrutura do projeto
-Abra seu terminal e execute os seguintes comandos para criar um projeto Vite limpo:
+### Passo 2: Configurar o Projeto Localmente
+Baixe os arquivos deste projeto para uma pasta no seu computador. Abra o terminal (VS Code ou CMD) nesta pasta e rode:
 
 ```bash
-# Crie o projeto (escolha React e depois TypeScript quando perguntado)
-npm create vite@latest sorteio-proz -- --template react-ts
-
-# Entre na pasta
-cd sorteio-proz
-
-# Instale as dependências básicas
+# 1. Instalar as dependências
 npm install
-```
 
-### 3. Instalar bibliotecas adicionais
-Este projeto utiliza ícones da biblioteca `lucide-react`. Instale-a:
-
-```bash
-npm install lucide-react
-```
-
-### 4. Configurar Tailwind CSS
-O código fornecido usa Tailwind. Para configurar no Vite:
-
-```bash
-# Instala o Tailwind e suas dependências
-npm install -D tailwindcss postcss autoprefixer
-
-# Cria o arquivo de configuração
-npx tailwindcss init -p
-```
-
-Abra o arquivo `tailwind.config.js` criado e substitua o conteúdo `content` por:
-
-```javascript
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-      },
-      colors: {
-        proz: {
-          dark: '#2e1065',
-          primary: '#6b21a8',
-          light: '#d8b4fe',
-          orange: '#f97316',
-          orangeHover: '#ea580c',
-        }
-      }
-    },
-  },
-  plugins: [],
-}
-```
-
-Adicione as diretivas do Tailwind no arquivo `src/index.css` (apague o conteúdo antigo):
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
-### 5. Importar os Arquivos
-Agora, copie os arquivos do código fornecido para dentro da pasta `src/` do seu projeto Vite:
-
-1.  Copie `App.tsx` para `src/App.tsx`.
-2.  Crie a pasta `src/components` e adicione `LandingPage.tsx`, `EducationPage.tsx`, `Flyer.tsx`.
-3.  Crie a pasta `src/utils` e adicione `formatters.ts`, `validators.ts`.
-4.  Crie o arquivo `src/types.ts`.
-5.  No arquivo `index.html` (na raiz do projeto), adicione a fonte Inter no `<head>`:
-    ```html
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    ```
-
-### 6. Rodar o projeto
-```bash
-npm run dev
-```
-O site estará rodando em `http://localhost:5173`.
-
----
-
-## 🌐 Como hospedar no GitHub Pages
-
-Para colocar este site no ar gratuitamente usando o GitHub Pages, siga estes passos:
-
-### 1. Preparar o `vite.config.ts`
-Abra o arquivo `vite.config.ts` na raiz do projeto e adicione a propriedade `base` com o nome do seu repositório:
-
-```typescript
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
-// Substitua 'NOME-DO-SEU-REPOSITORIO' pelo nome exato do repo no GitHub
-export default defineConfig({
-  plugins: [react()],
-  base: '/NOME-DO-SEU-REPOSITORIO/',
-})
-```
-
-### 2. Instalar o `gh-pages`
-```bash
+# 2. Instalar a ferramenta de deploy do GitHub Pages
 npm install gh-pages --save-dev
 ```
 
-### 3. Configurar o `package.json`
-Abra o `package.json` e adicione estas duas linhas:
+### Passo 3: Ajustar as Configurações (IMPORTANTE)
 
-1.  No topo do arquivo (antes de `name` ou depois):
-    ```json
-    "homepage": "https://SEU-USUARIO.github.io/NOME-DO-SEU-REPOSITORIO",
-    ```
-2.  Dentro de `scripts`, adicione:
-    ```json
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
-    ```
+#### A. Editar `vite.config.ts`
+Abra o arquivo `vite.config.ts` na raiz do projeto. Localize a linha `base` e altere para o nome do seu repositório.
 
-### 4. Enviar para o GitHub
-Crie um repositório no GitHub. No terminal do seu projeto:
-
-```bash
-git init
-git add .
-git commit -m "Primeiro commit - Sorteio Proz"
-git branch -M main
-git remote add origin https://github.com/SEU-USUARIO/NOME-DO-SEU-REPOSITORIO.git
-git push -u origin main
+**Antes:**
+```typescript
+base: '/nome-do-repositorio/',
 ```
 
-### 5. Fazer o Deploy
-Por fim, execute:
+**Depois (exemplo):**
+```typescript
+base: '/sorteio-proz-2025/',
+```
+*Atenção: Deve começar e terminar com barra `/`.*
+
+#### B. Editar `package.json`
+Abra o arquivo `package.json`. Localize a linha `"homepage"` (perto do topo) e altere para o seu endereço do GitHub Pages.
+
+**Exemplo:**
+```json
+"homepage": "https://SEU-USUARIO.github.io/sorteio-proz-2025",
+```
+
+### Passo 4: Enviar para o GitHub e Publicar
+
+No terminal, execute os comandos na ordem:
 
 ```bash
+# 1. Iniciar o git
+git init
+
+# 2. Adicionar os arquivos
+git add .
+
+# 3. Criar o primeiro commit
+git commit -m "Configuração inicial do Sorteio Proz"
+
+# 4. Renomear branch para main
+git branch -M main
+
+# 5. Conectar com seu repositório (pegue o link no GitHub)
+git remote add origin https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git
+
+# 6. Enviar os arquivos
+git push -u origin main
+
+# 7. Fazer o DEPLOY (Publicar o site)
 npm run deploy
 ```
 
-O comando irá criar uma versão otimizada do site e enviá-la para uma branch especial chamada `gh-pages`. Após alguns minutos, seu site estará acessível no link configurado.
+### Passo 5: Configurar no GitHub
+1. Vá até a página do seu repositório no GitHub.
+2. Clique em **Settings** (Configurações) > **Pages** (no menu lateral esquerdo).
+3. Em "Build and deployment" > "Source", certifique-se que está "Deploy from a branch".
+4. Em "Branch", mude de `main` (ou none) para **`gh-pages`** e clique em Save.
 
-## ⚠️ Nota Legal
-Este projeto é puramente educacional e não representa um sorteio real. Nenhum dado inserido é enviado para servidores externos; tudo é processado apenas no navegador do usuário para fins de demonstração.
+⏳ Aguarde alguns minutos e seu site estará no ar!
+
+---
+
+## ⚠️ Aviso de Responsabilidade
+
+Este projeto é **exclusivamente educacional**.
+- **Nenhum dado real é coletado ou armazenado.**
+- O formulário apenas valida o formato dos dados e redireciona para uma página educativa.
+- Use com responsabilidade e ética para conscientizar colegas e amigos sobre segurança da informação.
